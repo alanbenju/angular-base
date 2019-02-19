@@ -1,0 +1,105 @@
+<br>
+<br>
+<br>
+
+<div class="container">
+  <h1>Create a new user</h1>
+
+  <form>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input class="form-control" id="name" placeholder="Enter Name" [(ngModel)]="newUser.nombre" name="nameInput">
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last name</label>
+      <input class="form-control" id="lastname" placeholder="Enter last name" [(ngModel)]="newUser.apellido" name="lastnameInput">
+    </div>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="newUser.email" name="emailInput">
+    </div>
+    <div class="form-group">
+      <label for="pass">Password</label>
+      <input type="password" class="form-control" id="pass" placeholder="Password" [(ngModel)]="newUser.password" name="passInput">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)=create()>Create</button>
+  </form>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+  <h1>Users</h1>
+  <table class="table" *ngIf="users.length>0">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Info</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <th scope="row">{{user._id}}</th>
+        <td>{{user.nombre}}</td>
+        <td>{{user.apellido}}</td>
+        <td>{{user.email}}</td>
+        <td><button class="btn btn-primary" (click)="viewDetails(user)" data-toggle="modal" data-target="#detailsModal">I</button></td>
+        <td><button class="btn btn-danger" (click)="delete(user._id)">X</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- User details modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" *ngIf="selectedUser">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailsModalLabel">User info ({{selectedUser._id}})</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+
+            <div class="container" >
+                <h1>Update user</h1>
+              
+                <form>
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" id="name" placeholder="Enter Name" [(ngModel)]="selectedUser.nombre" name="nameInput">
+                  </div>
+                  <div class="form-group">
+                    <label for="lastname">Last name</label>
+                    <input class="form-control" id="lastname" placeholder="Enter last name" [(ngModel)]="selectedUser.apellido" name="lastnameInput">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="selectedUser.email" name="emailInput">
+                  </div>
+                  <div class="form-group">
+                    <label for="pass">Password</label>
+                    <input type="password" class="form-control" id="pass" placeholder="Password" [(ngModel)]="selectedUser.password" name="passInput">
+                  </div>
+                </form>
+              </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="update()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

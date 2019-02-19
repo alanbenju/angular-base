@@ -1,0 +1,39 @@
+<br>
+<br>
+
+<div class="container">
+  <h1>Quotations</h1>
+</div>
+
+<div class="row" style="margin: 3px">
+  <div class="col-lg-4">
+    <div class="card"  *ngFor="let dolar of dolarCards">
+      <div class="card-body">
+        <h5 class="card-title">Dolar</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Updated {{dolar[2]}} ago </h6>
+        <p class="card-text">Buy {{dolar[0]}}</p>
+        <p class="card-text">Sell {{dolar[1]}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card"  *ngFor="let peso of pesoCards">
+      <div class="card-body">
+        <h5 class="card-title">Peso</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Updated {{dolar[2]}} ago</h6>
+        <p class="card-text">Buy {{peso[0]}}</p>
+        <p class="card-text">Sell {{peso[1]}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card" *ngFor="let real of dolarCards">
+      <div class="card-body">
+        <h5 class="card-title">Real</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Updated {{dolar[2]}} ago</h6>
+        <p class="card-text">Buy {{real[0]}}</p>
+        <p class="card-text">Sell {{real[1]}}</p>
+      </div>
+    </div>
+  </div>
+</div>
