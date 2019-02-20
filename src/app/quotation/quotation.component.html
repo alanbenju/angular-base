@@ -5,7 +5,7 @@
   <h1>Quotations</h1>
 </div>
 
-<div class="row" style="margin: 3px">
+<div class="row margin">
     <div class="custom-control custom-switch">
       <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="useMock" (change)=changeMock()>
       <label class="custom-control-label" for="customSwitch1">Use mocked data</label>
@@ -14,16 +14,16 @@
 </div>
 
 
-<div class="row" style="margin: 3px">
+<div class="row margin">
   <div class="col-lg-4">
     <div>
-      <h3 style="text-align: center">Dolar</h3>
+      <h3 style="text-align: center">Dollar</h3>
     </div>
-    <div class="card" *ngFor="let dolar of dolarCards">
+    <div class="card" *ngFor="let dollar of dollarCards">
       <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">Updated {{dolar[2] | timeAgo}} </h6>
-        <p class="card-text">Buy {{dolar[0]}}</p>
-        <p class="card-text">Sell {{dolar[1]}}</p>
+        <h6 class="card-subtitle mb-2 text-muted">Updated {{dollar[2] | timeAgo}} </h6>
+        <p class="card-text">Buy {{dollar[0]}}</p>
+        <p class="card-text">Sell {{dollar[1]}}</p>
       </div>
     </div>
   </div>

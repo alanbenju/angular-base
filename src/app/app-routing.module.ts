@@ -4,7 +4,7 @@ import { UsersComponent }       from './users/users.component'
 import { QuotationComponent }       from './quotation/quotation.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', redirectTo: '/users', pathMatch: 'full' },
   { path: 'users',component: UsersComponent},
   { path: 'quotations',component: QuotationComponent}
 

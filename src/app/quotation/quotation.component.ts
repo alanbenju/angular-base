@@ -15,58 +15,40 @@ export class QuotationComponent implements OnInit {
 
   constructor(private quoteService: QuotationService, private config: AppConfigService) { }
 
-  dolarCards: any[] = []
+  dollarCards: any[] = []
   realCards: any[] = []
   pesoCards: any[] = []
-  refreshQuoteTime: Number
-  oscillation: Number
+  refreshQuoteTime: number
+  oscillation: number
   useMock = false
 
   editQuotation() {
-    let p1 = this.quoteService.get("pesos", this.useMock)/*.then((response)=>{
-      response[2] = Date()
-      if (this.pesoCards.length>0) response[0] = Number(this.pesoCards[0][0])+Number(this.oscillation)
-      if (this.pesoCards.length>0) response[1] = Number(this.pesoCards[0][1])+Number(this.oscillation)
-      response = response.slice()
-      this.pesoCards.unshift(response)
-    })*/.catch((err) => {
+    let p1 = this.quoteService.get("pesos", this.useMock).catch((err) => {
         console.log(err)
         return []
 
       })
-    let p2 = this.quoteService.get("dolar", this.useMock)/*.then((response)=>{
-      response[2] = Date()
-      if (this.dolarCards.length>0) response[0] = Number(this.dolarCards[0][0])+Number(this.oscillation)
-      if (this.dolarCards.length>0) response[1] = Number(this.dolarCards[0][1])+Number(this.oscillation)
-      response = response.slice()
-      this.dolarCards.unshift(response)
-    })*/.catch((err) => {
+    let p2 = this.quoteService.get("dolar", this.useMock).catch((err) => {
         console.log(err)
         return []
       })
-    let p3 = this.quoteService.get("real", this.useMock)/*.then((response)=>{
-      response[2] = Date()
-      if (this.realCards.length>0) response[0] = Number(this.realCards[0][0])+Number(this.oscillation)
-      if (this.realCards.length>0) response[1] = Number(this.realCards[0][1])+Number(this.oscillation)
-      response = response.slice()
-      this.realCards.unshift(response)
-    })*/.catch((err) => {
+    let p3 = this.quoteService.get("real", this.useMock).catch((err) => {
         console.log(err)
         return []
       })
-    return Promise.all([p1, p2, p3]).spread((pesos, dolar, real) => {
+    return Promise.all([p1, p2, p3]).spread((pesos, dollar, real) => {
       let now =new Date()
       if (pesos[2])pesos[2]=now
-      if (dolar[2])dolar[2]=now
+      if (dollar[2])dollar[2]=now
       if (real[2])real[2]=now
       if (this.useMock) {
         this.addOscillation(this.pesoCards, pesos)
-        this.addOscillation(this.dolarCards, dolar)
+        this.addOscillation(this.dollarCards, dollar)
         this.addOscillation(this.realCards, real)
       }
       else{
         if (pesos.length>0)this.pesoCards.unshift(pesos.slice())
-        if (dolar.length>0)this.dolarCards.unshift(dolar.slice())
+        if (dollar.length>0)this.dollarCards.unshift(dollar.slice())
         if(real.length>0)this.realCards.unshift(real.slice())
       }
       this.setData()
@@ -75,9 +57,8 @@ export class QuotationComponent implements OnInit {
   }
 
   addOscillation(arrayToShow, newElement) {
-    //newElement[2] = Date()
-    if (arrayToShow.length > 0) newElement[0] = Number(arrayToShow[0][0]) + Number(this.oscillation)
-    if (arrayToShow.length > 0) newElement[1] = Number(arrayToShow[0][1]) + Number(this.oscillation)
+    if (arrayToShow.length > 0) newElement[0] = Number(arrayToShow[0][0]) + this.oscillation
+    if (arrayToShow.length > 0) newElement[1] = Number(arrayToShow[0][1]) + this.oscillation
     newElement = newElement.slice()
     arrayToShow.unshift(newElement)
   }
@@ -89,7 +70,6 @@ export class QuotationComponent implements OnInit {
     this.getPersistedData()
 
     this.editQuotation().then(() => {
-      // store array to localstorage      
       var self = this
       setInterval(function () {
         self.editQuotation()
@@ -98,14 +78,15 @@ export class QuotationComponent implements OnInit {
   }
 
   changeMock() {
-    this.dolarCards = []
+    this.dollarCards = []
     this.pesoCards = []
     this.realCards = []
+    this.setData()
   }
 
   getPersistedData() {
-    var dolarData = localStorage.getItem("dolar");
-    if (dolarData && dolarData != "undefined") this.dolarCards = JSON.parse(dolarData)
+    var dollarData = localStorage.getItem("dollar");
+    if (dollarData && dollarData != "undefined") this.dollarCards = JSON.parse(dollarData)
     var pesosData = localStorage.getItem("pesos");
     if (pesosData && pesosData != "undefined") this.pesoCards = JSON.parse(pesosData)
     var realData = localStorage.getItem("real");
@@ -114,7 +95,7 @@ export class QuotationComponent implements OnInit {
   }
 
   setData() {
-    localStorage.setItem("dolar", JSON.stringify(this.dolarCards));
+    localStorage.setItem("dollar", JSON.stringify(this.dollarCards));
     localStorage.setItem("pesos", JSON.stringify(this.pesoCards));
     localStorage.setItem("real", JSON.stringify(this.realCards));
     localStorage.setItem("useMock", this.useMock.toString());
