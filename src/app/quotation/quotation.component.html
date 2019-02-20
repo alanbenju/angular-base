@@ -6,9 +6,20 @@
 </div>
 
 <div class="row" style="margin: 3px">
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="useMock" (change)=changeMock()>
+      <label class="custom-control-label" for="customSwitch1">Use mocked data</label>
+
+    </div>
+</div>
+
+
+<div class="row" style="margin: 3px">
   <div class="col-lg-4">
-    <div><h3 style="text-align: center">Dolar</h3></div> 
-    <div class="card"  *ngFor="let dolar of dolarCards">
+    <div>
+      <h3 style="text-align: center">Dolar</h3>
+    </div>
+    <div class="card" *ngFor="let dolar of dolarCards">
       <div class="card-body">
         <h6 class="card-subtitle mb-2 text-muted">Updated {{dolar[2] | timeAgo}} </h6>
         <p class="card-text">Buy {{dolar[0]}}</p>
@@ -17,8 +28,10 @@
     </div>
   </div>
   <div class="col-lg-4">
-      <div><h3 style="text-align: center">Peso</h3></div> 
-    <div class="card"  *ngFor="let peso of pesoCards">
+    <div>
+      <h3 style="text-align: center">Peso</h3>
+    </div>
+    <div class="card" *ngFor="let peso of pesoCards">
       <div class="card-body">
         <h6 class="card-subtitle mb-2 text-muted">Updated {{peso[2] | timeAgo}}</h6>
         <p class="card-text">Buy {{peso[0]}}</p>
@@ -27,7 +40,9 @@
     </div>
   </div>
   <div class="col-lg-4">
-      <div><h3 style="text-align: center">Real</h3></div> 
+    <div>
+      <h3 style="text-align: center">Real</h3>
+    </div>
     <div class="card" *ngFor="let real of realCards">
       <div class="card-body">
         <h6 class="card-subtitle mb-2 text-muted">Updated {{real[2] | timeAgo}}</h6>
