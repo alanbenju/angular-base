@@ -1,0 +1,5 @@
+{
+    "refreshQuoteTime":2000,
+    "serverUrl":"http://localhost:3000",
+    "oscillation":1
+}
